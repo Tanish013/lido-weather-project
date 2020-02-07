@@ -10,14 +10,17 @@ export default class Home extends Component {
       countryName: {},
       tomdata: [],
       cityName: "",
+      error: "",
       today: false,
       hourly: false,
-      tomorrow: false
+      tomorrow: false,
+      count: 1,
+      display: false
     };
   }
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    this.setState({ [name]: event.target.value, error: "", display: false });
   };
   getHourlyData = e => {
     if (this.state.cityName !== "") {
@@ -34,7 +37,10 @@ export default class Home extends Component {
               tomorrow: false
             });
           });
-        } else alert("Please enter a valid City Name");
+        } else {
+          // alert("Please enter a valid City Name");
+          this.setState({ error: "Enter valid city name", display: true });
+        }
       });
     } else {
       alert("Please enter a valid city Name");
@@ -101,6 +107,12 @@ export default class Home extends Component {
               minLength="3"
               maxLength="30"
             />
+            <div
+              className="alert alert-primary"
+              style={{ display: this.state.error ? "" : "none" }}
+            >
+              {this.state.error}
+            </div>
             <div className="row mt-4">
               <div className="col-xs">
                 <button
@@ -156,7 +168,10 @@ export default class Home extends Component {
         {this.state.tomorrow
           ? this.state.tomdata.slice(8, 9).map(weather => {
               return (
-                <div className="text-center">
+                <div
+                  className="text-center"
+                  key={(this.state.count = this.state.count + 1)}
+                >
                   <p className="display-3 font-weight-bold">
                     {countryName.name},{countryName.country}
                   </p>

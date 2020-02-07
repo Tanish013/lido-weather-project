@@ -1,5 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+It will tell you about the current temperatur, coming day and hourly temperature. To Run this on your desktop just download it and then open cmd in that folder and run command npm install. 
 ## Available Scripts
 
 In the project directory, you can run:
