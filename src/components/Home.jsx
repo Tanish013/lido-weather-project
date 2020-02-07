@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/home.css";
+import dateBuilder from "./date";
 // import { getCurrentData } from "../getWeather";
 
 export default class Home extends Component {
@@ -15,37 +16,6 @@ export default class Home extends Component {
       tomorrow: false
     };
   }
-  dateBuilder = d => {
-    let months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
-    return `${day} ${date} ${month} ${year}`;
-  };
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
@@ -126,7 +96,7 @@ export default class Home extends Component {
   render() {
     const { cityName, currentData, countryName } = this.state;
     return (
-      <div className="background">
+      <div>
         <div className="container">
           <div>
             <h1 className="text-center display-3">Weather App</h1>
@@ -154,7 +124,7 @@ export default class Home extends Component {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    onClick={e => this.getTomorrowDataData()}
+                    onClick={e => this.getTomorrowData()}
                     style={{ margin: "10px" }}
                   >
                     Tomorrow
@@ -176,7 +146,7 @@ export default class Home extends Component {
               <p className="display-3 font-weight-bold">
                 {currentData.name}, {currentData.sys.country}
               </p>
-              <h4 className="font-italic">{this.dateBuilder(new Date())}</h4>
+              <h4 className="font-italic">{dateBuilder(new Date())}</h4>
               <h4 className="font-italic">
                 Humidity: {currentData.main.humidity}%
               </h4>
