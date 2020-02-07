@@ -248,10 +248,10 @@ export default class Home extends Component {
             <p className="text-center display-3 font-weight-bold">
               {countryName.name},{countryName.country}
             </p>
-            {this.state.tomdata.map(weather => {
-              return (
-                <div>
-                  <div className="text-center">
+            <div className="row">
+              {this.state.tomdata.map(weather => {
+                return (
+                  <div className="text-center col-sm-4">
                     <h4 className="font-italic">{weather.dt_txt}</h4>
                     <h4 id="temp">
                       {Math.round(weather.main.temp)}
@@ -268,9 +268,9 @@ export default class Home extends Component {
                       Wind: {weather.wind.speed}mph
                     </h4>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         ) : (
           ""
