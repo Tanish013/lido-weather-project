@@ -25,19 +25,17 @@ export default class Home extends Component {
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.cityName}&units=metric&cnt=10&APPID=566a99d54766a0fc5a545135c8cfab75`
       )
-        .then(res => res.json())
         .then(res => {
-          if (res.message !== "404") {
-            this.setState({
-              tomdata: res.list,
-              countryName: res.city,
-              hourly: true,
-              tomorrow: false,
-              today: false
-            });
-          } else {
-            alert(res.message);
-          }
+          if (res.ok) res.json();
+        })
+        .then(res => {
+          this.setState({
+            tomdata: res.list,
+            countryName: res.city,
+            hourly: true,
+            tomorrow: false,
+            today: false
+          });
           //console.log(this.state.tomdata);
         })
         .catch(err => console.log(err));
@@ -50,20 +48,17 @@ export default class Home extends Component {
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.cityName}&units=metric&cnt=10&APPID=566a99d54766a0fc5a545135c8cfab75`
       )
-        .then(res => res.json())
         .then(res => {
-          if (res.cod !== "404") {
-            this.setState({
-              tomdata: res.list,
-              countryName: res.city,
-              tomorrow: true,
-              hourly: false,
-              today: false
-            });
-          } else {
-            alert(res.message);
-          }
-          // console.log(this.state.tomdata);
+          if (res.ok) res.json();
+        })
+        .then(res => {
+          this.setState({
+            tomdata: res.list,
+            countryName: res.city,
+            tomorrow: true,
+            hourly: false,
+            today: false
+          });
         })
         .catch(err => console.log(err));
     } else {
@@ -75,18 +70,16 @@ export default class Home extends Component {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${this.state.cityName}&units=metric&APPID=566a99d54766a0fc5a545135c8cfab75`
       )
-        .then(res => res.json())
         .then(res => {
-          if (res.cod !== "404") {
-            this.setState({
-              currentData: res,
-              today: true,
-              hourly: false,
-              tomorrow: false
-            });
-          } else {
-            alert(res.message);
-          } //console.log(this.state.currentData);
+          if (res.ok) res.json();
+        })
+        .then(res => {
+          this.setState({
+            currentData: res,
+            today: true,
+            hourly: false,
+            tomorrow: false
+          });
         })
         .catch(err => console.log(err));
     } else {
