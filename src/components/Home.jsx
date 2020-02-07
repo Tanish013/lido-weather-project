@@ -24,21 +24,19 @@ export default class Home extends Component {
     if (this.state.cityName !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.cityName}&units=metric&cnt=10&APPID=566a99d54766a0fc5a545135c8cfab75`
-      )
-        .then(res => {
-          if (res.ok) res.json();
-        })
-        .then(res => {
-          this.setState({
-            tomdata: res.list,
-            countryName: res.city,
-            hourly: true,
-            tomorrow: false,
-            today: false
+      ).then(res => {
+        if (res.ok) {
+          res.json().then(res => {
+            this.setState({
+              tomdata: res.list,
+              countryName: res.city,
+              today: false,
+              hourly: true,
+              tomorrow: false
+            });
           });
-          //console.log(this.state.tomdata);
-        })
-        .catch(err => console.log(err));
+        } else alert("Please enter a valid City Name");
+      });
     } else {
       alert("Please enter a valid city Name");
     }
@@ -47,20 +45,19 @@ export default class Home extends Component {
     if (this.state.cityName !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.cityName}&units=metric&cnt=10&APPID=566a99d54766a0fc5a545135c8cfab75`
-      )
-        .then(res => {
-          if (res.ok) res.json();
-        })
-        .then(res => {
-          this.setState({
-            tomdata: res.list,
-            countryName: res.city,
-            tomorrow: true,
-            hourly: false,
-            today: false
+      ).then(res => {
+        if (res.ok) {
+          res.json().then(res => {
+            this.setState({
+              tomdata: res.list,
+              countryName: res.city,
+              today: false,
+              hourly: false,
+              tomorrow: true
+            });
           });
-        })
-        .catch(err => console.log(err));
+        } else alert("Please enter a valid City Name");
+      });
     } else {
       alert("Please enter a city name");
     }
@@ -69,19 +66,18 @@ export default class Home extends Component {
     if (this.state.cityName !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${this.state.cityName}&units=metric&APPID=566a99d54766a0fc5a545135c8cfab75`
-      )
-        .then(res => {
-          if (res.ok) res.json();
-        })
-        .then(res => {
-          this.setState({
-            currentData: res,
-            today: true,
-            hourly: false,
-            tomorrow: false
+      ).then(res => {
+        if (res.ok) {
+          res.json().then(res => {
+            this.setState({
+              currentData: res,
+              today: true,
+              hourly: false,
+              tomorrow: false
+            });
           });
-        })
-        .catch(err => console.log(err));
+        } else alert("Please enter a valid City Name");
+      });
     } else {
       alert("Please enter a city name");
     }
