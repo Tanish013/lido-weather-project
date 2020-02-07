@@ -49,7 +49,7 @@ export default class Home extends Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
-  getData = e => {
+  getHourlyData = e => {
     if (this.state.cityName !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.cityName}&units=metric&cnt=10&APPID=566a99d54766a0fc5a545135c8cfab75`
@@ -74,7 +74,7 @@ export default class Home extends Component {
       alert("Please enter a valid city Name");
     }
   };
-  getDatatomo = e => {
+  getTomorrowData = e => {
     if (this.state.cityName !== "") {
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${this.state.cityName}&units=metric&cnt=10&APPID=566a99d54766a0fc5a545135c8cfab75`
@@ -154,7 +154,7 @@ export default class Home extends Component {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    onClick={e => this.getDatatomo()}
+                    onClick={e => this.getTomorrowDataData()}
                     style={{ margin: "10px" }}
                   >
                     Tomorrow
@@ -162,7 +162,7 @@ export default class Home extends Component {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    onClick={e => this.getData()}
+                    onClick={e => this.getHourlyData()}
                     style={{ margin: "10px" }}
                   >
                     Hourly
