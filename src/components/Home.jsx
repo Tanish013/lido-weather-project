@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../css/home.css";
 import dateBuilder from "./date";
-// import { getCurrentData } from "../getWeather";
 
 export default class Home extends Component {
   constructor() {
