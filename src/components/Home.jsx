@@ -39,11 +39,24 @@ export default class Home extends Component {
           });
         } else {
           // alert("Please enter a valid City Name");
-          this.setState({ error: "Enter valid city name", display: true });
+          this.setState({
+            error: "Enter valid city name",
+            display: true,
+            today: false,
+            hourly: false,
+            tomorrow: false
+          });
         }
       });
     } else {
-      alert("Please enter a valid city Name");
+      this.setState({
+        error: "Enter valid city name",
+        display: true,
+        display: true,
+        today: false,
+        hourly: false,
+        tomorrow: false
+      });
     }
   };
   getTomorrowData = e => {
@@ -61,10 +74,24 @@ export default class Home extends Component {
               tomorrow: true
             });
           });
-        } else alert("Please enter a valid City Name");
+        } else
+          this.setState({
+            error: "Enter valid city name",
+            display: true,
+            today: false,
+            hourly: false,
+            tomorrow: false
+          });
       });
     } else {
-      alert("Please enter a city name");
+      this.setState({
+        error: "Enter valid city name",
+        display: true,
+        display: true,
+        today: false,
+        hourly: true,
+        tomorrow: false
+      });
     }
   };
   getTodayData = e => {
@@ -81,10 +108,25 @@ export default class Home extends Component {
               tomorrow: false
             });
           });
-        } else alert("Please enter a valid City Name");
+        } else
+          this.setState({
+            error: "Enter valid city name",
+            display: true,
+            display: true,
+            today: false,
+            hourly: false,
+            tomorrow: false
+          });
       });
     } else {
-      alert("Please enter a city name");
+      this.setState({
+        error: "Enter valid city name",
+        display: true,
+        display: true,
+        today: false,
+        hourly: false,
+        tomorrow: false
+      });
     }
   };
 
@@ -108,7 +150,7 @@ export default class Home extends Component {
               maxLength="30"
             />
             <div
-              className="alert alert-primary"
+              className="jumbotron text center font-weight-bold"
               style={{ display: this.state.error ? "" : "none" }}
             >
               {this.state.error}
@@ -121,7 +163,7 @@ export default class Home extends Component {
                   onClick={e => this.getTodayData()}
                   style={{ margin: "10px" }}
                 >
-                  Today's
+                  Today
                 </button>
                 <button
                   type="submit"
@@ -170,7 +212,10 @@ export default class Home extends Component {
               return (
                 <div
                   className="text-center"
-                  key={(this.state.count = this.state.count + 1)}
+                  key={() => {
+                    this.setState({ count: this.state.count + 1 });
+                    return this.state.count;
+                  }}
                 >
                   <p className="display-3 font-weight-bold">
                     {countryName.name},{countryName.country}
@@ -199,20 +244,24 @@ export default class Home extends Component {
             </p>
             {this.state.tomdata.map(weather => {
               return (
-                <div className="text-center">
-                  <h4 className="font-italic">{weather.dt_txt}</h4>
-                  <h4 className="font-italic">
-                    Humidity: {weather.main.humidity}%
-                  </h4>
-                  <h4 className="font-italic">
-                    Pressure: {weather.main.pressure}psi
-                  </h4>
-                  <h4 className="font-italic">{weather.weather[0].main}</h4>
-                  <h4 className="font-italic">Wind: {weather.wind.speed}mph</h4>
-                  <h4 id="temp">
-                    {Math.round(weather.main.temp)}
-                    <sup>o</sup>C
-                  </h4>
+                <div>
+                  <div className="text-center">
+                    <h4 className="font-italic">{weather.dt_txt}</h4>
+                    <h4 className="font-italic">
+                      Humidity: {weather.main.humidity}%
+                    </h4>
+                    <h4 className="font-italic">
+                      Pressure: {weather.main.pressure}psi
+                    </h4>
+                    <h4 className="font-italic">{weather.weather[0].main}</h4>
+                    <h4 className="font-italic">
+                      Wind: {weather.wind.speed}mph
+                    </h4>
+                    <h4 id="temp">
+                      {Math.round(weather.main.temp)}
+                      <sup>o</sup>C
+                    </h4>
+                  </div>
                 </div>
               );
             })}
