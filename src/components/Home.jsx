@@ -87,7 +87,9 @@ export default class Home extends Component {
     return (
       <div className="container">
         <div>
-          <h1 className="text-center display-3">Weather App</h1>
+          <h1 className="text-center font-weight-bold display-3">
+            Weather App
+          </h1>
 
           <div className="form-group">
             <input
