@@ -154,7 +154,7 @@ export default class Home extends Component {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    onClick={e => this.getTomorrowDataData()}
+                    onClick={e => this.getTomorrowData()}
                     style={{ margin: "10px" }}
                   >
                     Tomorrow
