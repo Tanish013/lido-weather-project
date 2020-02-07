@@ -15,7 +15,17 @@ export default class Home extends Component {
       hourly: false,
       tomorrow: false,
       count: 1,
-      display: false
+      display: false,
+      forecast_url:
+        process.env.REACT_APP_WEATHER_URL +
+        "/forecast?units=metric&cnt=10&APPID=" +
+        process.env.REACT_APP_WEATHER_API_KEY +
+        "&q=",
+      weather_url:
+        process.env.REACT_APP_WEATHER_URL +
+        "/weather?units=metric&cnt=10&APPID=" +
+        process.env.REACT_APP_WEATHER_API_KEY +
+        "&q="
     };
   }
 
@@ -52,7 +62,6 @@ export default class Home extends Component {
       this.setState({
         error: "Enter valid city name",
         display: true,
-        display: true,
         today: false,
         hourly: false,
         tomorrow: false
@@ -87,9 +96,8 @@ export default class Home extends Component {
       this.setState({
         error: "Enter valid city name",
         display: true,
-        display: true,
         today: false,
-        hourly: true,
+        hourly: false,
         tomorrow: false
       });
     }
@@ -112,7 +120,6 @@ export default class Home extends Component {
           this.setState({
             error: "Enter valid city name",
             display: true,
-            display: true,
             today: false,
             hourly: false,
             tomorrow: false
@@ -121,7 +128,6 @@ export default class Home extends Component {
     } else {
       this.setState({
         error: "Enter valid city name",
-        display: true,
         display: true,
         today: false,
         hourly: false,
@@ -191,6 +197,10 @@ export default class Home extends Component {
               {currentData.name}, {currentData.sys.country}
             </p>
             <h4 className="font-italic">{dateBuilder(new Date())}</h4>
+            <h4 id="temp">
+              {Math.round(currentData.main.temp)}
+              <sup>o</sup>C
+            </h4>
             <h4 className="font-italic">
               Humidity: {currentData.main.humidity}%
             </h4>
@@ -199,10 +209,6 @@ export default class Home extends Component {
             </h4>
             <h4 className="font-italic">{currentData.weather[0].main}</h4>
             <h4 className="font-italic">Wind: {currentData.wind.speed}mph</h4>
-            <h4 id="temp">
-              {Math.round(currentData.main.temp)}
-              <sup>o</sup>C
-            </h4>
           </div>
         ) : (
           ""
@@ -221,6 +227,10 @@ export default class Home extends Component {
                     {countryName.name},{countryName.country}
                   </p>
                   <h4 className="font-italic">{weather.dt_txt}</h4>
+                  <h4 id="temp">
+                    {Math.round(weather.main.temp)}
+                    <sup>o</sup>C
+                  </h4>
                   <h4 className="font-italic">
                     Humidity: {weather.main.humidity}%
                   </h4>
@@ -229,10 +239,6 @@ export default class Home extends Component {
                   </h4>
                   <h4 className="font-italic">{weather.weather[0].main}</h4>
                   <h4 className="font-italic">Wind: {weather.wind.speed}mph</h4>
-                  <h4 id="temp">
-                    {Math.round(weather.main.temp)}
-                    <sup>o</sup>C
-                  </h4>
                 </div>
               );
             })
@@ -247,6 +253,10 @@ export default class Home extends Component {
                 <div>
                   <div className="text-center">
                     <h4 className="font-italic">{weather.dt_txt}</h4>
+                    <h4 id="temp">
+                      {Math.round(weather.main.temp)}
+                      <sup>o</sup>C
+                    </h4>
                     <h4 className="font-italic">
                       Humidity: {weather.main.humidity}%
                     </h4>
@@ -256,10 +266,6 @@ export default class Home extends Component {
                     <h4 className="font-italic">{weather.weather[0].main}</h4>
                     <h4 className="font-italic">
                       Wind: {weather.wind.speed}mph
-                    </h4>
-                    <h4 id="temp">
-                      {Math.round(weather.main.temp)}
-                      <sup>o</sup>C
                     </h4>
                   </div>
                 </div>
